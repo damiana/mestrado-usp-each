@@ -80,18 +80,17 @@ public class Processamento {
 			b = processarImagemMedia(imagem.getBufferedImage());
 			break;
 		case 2:
-			//pixel = getImageGreaterOrEqualThanMediana(imagem.getPixel(w, h));
 			b = processarImagemMediana(imagem.getBufferedImage());
 			break;
 		case 3:
-			b = processarImagemPassaAlta(imagem.getBufferedImage(), "sobel");
+			b = calcularEqualizacao(imagem.getBufferedImage());
 			break;
 		case 4:
+			b = processarImagemPassaAlta(imagem.getBufferedImage(), "sobel");
+			break;
+		case 5:
 			b = processarImagemPassaAlta(imagem.getBufferedImage(), "roberts");
 			break;
-			/*  case 5:
-                    pixel = getImageGreaterThenAndLessThan(imagem.getPixel(w, h));
-                    break;*/
 		default:
 			b = getPBImage();
 		}
@@ -329,5 +328,78 @@ public class Processamento {
 
 		return result;
 
+	}
+
+	public BufferedImage calcularEqualizacao(BufferedImage imagem) {
+		boolean[][] bmask = null;
+		// histogram
+		int[] histRed = new int[256];
+		int[] histGreen = new int[256];
+		int[] histBlue = new int[256];
+		int red, green, blue;
+
+		BufferedImage ima_out  = new BufferedImage(imagem.getWidth(),imagem.getHeight(),imagem.getType());
+
+		for(int y=0; y<imagem.getHeight(); y++){
+			for(int x=0; x<imagem.getWidth(); x++){
+
+				red 	= new Color(imagem.getRGB(x, y)).getRed();
+				green 	= new Color(imagem.getRGB(x, y)).getGreen();
+				blue 	= new Color(imagem.getRGB(x, y)).getBlue();
+
+				histRed[red]++;
+				histGreen[green]++;
+				histBlue[blue]++;
+			}
+		}
+
+		// Cumulative Distribution Function
+		int cdfRed[] = new int[256];
+		int cdfGreen[] = new int[256];
+		int cdfBlue[] = new int[256];
+		cdfRed[0] = histRed[0];
+		cdfGreen[0] = histGreen[0];
+		cdfBlue[0] = histBlue[0];
+		for(int i=1; i<histRed.length; i++){
+			cdfRed[i] 	= cdfRed[i-1]+histRed[i];
+			cdfGreen[i] = cdfGreen[i-1]+histGreen[i];
+			cdfBlue[i] 	= cdfBlue[i-1]+histBlue[i];
+		}
+
+
+		// Equalization
+		int numberOfPixels = imagem.getWidth()*imagem.getHeight();
+		int minRed = min(cdfRed);
+		int minGreen = min(cdfGreen);
+		int minBlue = min(cdfBlue);
+		Color c;
+		for (int x = 0; x < imagem.getWidth(); x++) {
+			for (int y = 0; y < imagem.getHeight(); y++) {
+
+				red 	= new Color(imagem.getRGB(x, y)).getRed();
+				green 	= new Color(imagem.getRGB(x, y)).getGreen();
+				blue 	= new Color(imagem.getRGB(x, y)).getBlue();
+
+
+				red = (int)((((double)cdfRed[red]-minRed)/(numberOfPixels-minRed)) * 255);
+				green = (int)((((double)cdfGreen[green]-minGreen)/(numberOfPixels-minGreen)) * 255);
+				blue = (int)((((double)cdfBlue[blue]-minBlue)/(numberOfPixels-minBlue)) * 255);
+				c = new Color(red,green, blue);
+				ima_out.setRGB(x, y, c.getRGB());
+			}
+		}
+		return ima_out;
+
+	}
+
+
+	private int min(int[] arr){
+		int min=-1;
+		for(int i=0; i<arr.length; i++){
+			if(min == -1 || arr[i] < min){
+				min = arr[i];
+			}
+		}
+		return min;
 	}
 }

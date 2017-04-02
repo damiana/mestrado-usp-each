@@ -168,7 +168,7 @@ public class Main extends JFrame {
 
         lblTitleTrabalho1.setText("Filtros");
 
-        comboFiltros.setModel(new DefaultComboBoxModel(new String[] { "Preto e Branco", "Media", "Mediana", "Sobel", "Robert" }));
+        comboFiltros.setModel(new DefaultComboBoxModel(new String[] { "P e B", "Media", "Mediana", "Equalização","Sobel", "Roberts" }));
         comboFiltros.setEnabled(false);
         comboFiltros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,7 +387,7 @@ private void btnHistogramaActionPerformed(java.awt.event.ActionEvent evt) {
 private void comboTrabalho1ActionPerformed(java.awt.event.ActionEvent evt) {
 
     
-    if( comboFiltros.getSelectedIndex() >= 0 && comboFiltros.getSelectedIndex() < 5)
+    if( comboFiltros.getSelectedIndex() >= 0 && comboFiltros.getSelectedIndex() < 6)
     {
         controller.aplicarFiltros(comboFiltros.getSelectedIndex());
     }
