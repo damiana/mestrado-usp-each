@@ -2,7 +2,9 @@ package view;
 
 import java.awt.Color;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +28,8 @@ public class Main extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void initComponents() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	private void initComponents() {
 
         btnEscolherImagem = new JButton();
         fieldImagemPath = new JTextField();
@@ -44,7 +47,7 @@ public class Main extends JFrame {
         lblImagemProcessada = new JLabel();
         jPainel = new JPanel();
         lblTitleTrabalho1 = new JLabel();
-        comboTrabalho1 = new javax.swing.JComboBox();
+        comboFiltros = new JComboBox();
         lblTitleTrabalho2 = new JLabel();
         comboAngulo = new JSpinner();
         btnZoomIn = new JButton();
@@ -163,11 +166,11 @@ public class Main extends JFrame {
 
         jPainel.setOpaque(false);
 
-        lblTitleTrabalho1.setText("Trabalho 1");
+        lblTitleTrabalho1.setText("Filtros");
 
-        comboTrabalho1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "A", "B", "C", "D", "E" }));
-        comboTrabalho1.setEnabled(false);
-        comboTrabalho1.addActionListener(new java.awt.event.ActionListener() {
+        comboFiltros.setModel(new DefaultComboBoxModel(new String[] { "Selecione", "Media", "Mediana", "C", "D", "E" }));
+        comboFiltros.setEnabled(false);
+        comboFiltros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTrabalho1ActionPerformed(evt);
             }
@@ -229,7 +232,7 @@ public class Main extends JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitleTrabalho1)
-                    .addComponent(comboTrabalho1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTitleTrabalho2)
@@ -253,7 +256,7 @@ public class Main extends JFrame {
                     .addComponent(lblTitleTrabalho2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTrabalho1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnZoomIn)
                     .addComponent(btnZoomOut)
@@ -366,7 +369,7 @@ private void btImageChooserActionPerformed(java.awt.event.ActionEvent evt) {
         btnVerOriginal.setEnabled(true);
         btnZoomIn.setEnabled(true);
         btnZoomOut.setEnabled(true);
-        comboTrabalho1.setEnabled(true);
+        comboFiltros.setEnabled(true);
         comboAngulo.setEnabled(true);
     }
 
@@ -384,9 +387,9 @@ private void btnHistogramaActionPerformed(java.awt.event.ActionEvent evt) {
 private void comboTrabalho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTrabalho1ActionPerformed
 
     
-    if( comboTrabalho1.getSelectedIndex() >= 0 && comboTrabalho1.getSelectedIndex() < 6)
+    if( comboFiltros.getSelectedIndex() >= 0 && comboFiltros.getSelectedIndex() < 6)
     {
-        //controller.transformTrabalhoUm(comboTrabalho1.getSelectedIndex());
+        controller.aplicarFiltros(comboFiltros.getSelectedIndex());
     }
     
 }//GEN-LAST:event_comboTrabalho1ActionPerformed
@@ -490,7 +493,7 @@ private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton btnZoomIn;
     private javax.swing.JButton btnZoomOut;
     private javax.swing.JSpinner comboAngulo;
-    private javax.swing.JComboBox comboTrabalho1;
+    private javax.swing.JComboBox comboFiltros;
     public javax.swing.JTextField fieldImagemPath;
     private javax.swing.JPanel jPainel;
     private javax.swing.JLabel lblImagemOriginal;

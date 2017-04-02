@@ -57,4 +57,9 @@ public class Controller {
 	    public Imagem getImagem() {
 	        return imagem;
 	    }
+	    
+	    public void aplicarFiltros( int option )
+	    {
+	    	setProcessarImagem(processamento.getBufferedAplicarFiltros(option));
+	    }
 }
