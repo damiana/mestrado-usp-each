@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Imagem;
+import model.Processamento;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -50,7 +51,6 @@ public class Histograma extends ApplicationFrame {
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 
 		setContentPane(chartPanel);
-
 		this.pack();
 		RefineryUtilities.centerFrameOnScreen(this);
 	}
@@ -62,21 +62,30 @@ public class Histograma extends ApplicationFrame {
 	}
 
 	private ChartPanel createChartPanel() {
-		
+
 		dataset = new HistogramDataset();
 		Raster raster = this.imagemFiltro.getRaster();
 		final int w = this.imagemFiltro.getWidth();
 		final int h = this.imagemFiltro.getHeight();
 		double[] r = new double[w * h];
-		
+
+		// vetor de pixels da imagem. Tirado do BufferedImage
+		int pixelsImage []  = this.imagemFiltro.getRGB(0, 0, w, h, null, 0, w);
+		// pegando o histograma
+		double[] histogram = Processamento.getMatrixHistogramGrayScale(pixelsImage, h, w);
+
 		r = raster.getSamples(0, 0, w, h, 0, r);
-		dataset.addSeries("Red", r, BINS);
-		
+		dataset.addSeries("Vermelho", r, BINS);
+
 		r = raster.getSamples(0, 0, w, h, 1, r);
-		dataset.addSeries("Green", r, BINS);
-		
+		dataset.addSeries("Verde", r, BINS);
+
 		r = raster.getSamples(0, 0, w, h, 2, r);
-		dataset.addSeries("Blue", r, BINS);
+		dataset.addSeries("Azul", r, BINS);
+
+		System.out.println("aaaaaaaaa " + histogram);
+		
+		//dataset.addSeries("Pixels", imagem.getImagePixelInline(), 256,0.0,256.0);
 		
 		// chart
 		JFreeChart chart = ChartFactory.createHistogram(
@@ -93,7 +102,7 @@ public class Histograma extends ApplicationFrame {
 		XYPlot plot = (XYPlot) chart.getPlot();
 		renderer = (XYBarRenderer) plot.getRenderer();
 		renderer.setBarPainter(new StandardXYBarPainter());
-		
+
 		// translucent red, green & blue
 		Paint[] paintArray = {
 				new Color(0x80ff0000, true),
