@@ -23,17 +23,8 @@ public class Controller {
 
 	        view.fieldImagemPath.setText(arqImagem.getAbsolutePath());
 
-	        setValores();
 	        setImagemOriginal();
 	        setPBImage();
-	    }
-	    
-	    private void setValores() 
-	    {        
-	        //view.lblModa.setText(String.valueOf(imagem.getModa()));
-	        //view.lblVariancia.setText(String.valueOf(imagem.getVariancia()));
-	        //view.lblMedia.setText(String.valueOf(imagem.getMedia()));
-	        //view.lblMediana.setText(String.valueOf(imagem.getMediana()));
 	    }
 	    
 	    private void setImagemOriginal() 
@@ -61,5 +52,10 @@ public class Controller {
 	    public void aplicarFiltros( int option )
 	    {
 	    	setProcessarImagem(processamento.getBufferedAplicarFiltros(option));
+	    }
+	    
+	    public void aplicarHistogramaFiltros( int option )
+	    {
+	    	processamento.getBufferedAplicarHistogramaFiltros(option);
 	    }
 }

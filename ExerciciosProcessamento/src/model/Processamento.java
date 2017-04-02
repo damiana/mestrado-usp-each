@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 
+import view.Histograma;
+
 public class Processamento {
 
 	private BufferedImage bufferImage;
@@ -40,8 +42,8 @@ public class Processamento {
 	public BufferedImage getResizeImagem(BufferedImage imagem, int width, int height) {
 		Double novaImgLargura = (double) imagem.getWidth();  
 		Double novaImgAltura = (double) imagem.getHeight();
-		//resize(BufferedImage imagem, Integer imgLargura, Integer imgAltura) 
 		Double imgProporcao;  
+
 		if (novaImgLargura >= width) { 
 			imgProporcao = (novaImgAltura / novaImgLargura);  
 			novaImgLargura = (double) width;  
@@ -72,36 +74,67 @@ public class Processamento {
 	}
 	public BufferedImage getBufferedAplicarFiltros(int option) {
 
-		BufferedImage b = new BufferedImage(imagem.getBufferedImage().getWidth(), imagem.getBufferedImage().getHeight(), BufferedImage.TYPE_BYTE_GRAY); 
+		bufferImage = new BufferedImage(imagem.getBufferedImage().getWidth(), imagem.getBufferedImage().getHeight(), BufferedImage.TYPE_BYTE_GRAY); 
 
 		switch(option)
 		{
 		case 1:
-			b = processarImagemMedia(imagem.getBufferedImage());
+			bufferImage = processarImagemMedia(imagem.getBufferedImage());
 			break;
 		case 2:
-			b = processarImagemMediana(imagem.getBufferedImage());
+			bufferImage = processarImagemMediana(imagem.getBufferedImage());
 			break;
 		case 3:
-			b = calcularEqualizacao(imagem.getBufferedImage());
+			bufferImage = processarImagemEqualizacao(imagem.getBufferedImage());
 			break;
 		case 4:
-			b = processarImagemPassaAlta(imagem.getBufferedImage(), "sobel");
+			bufferImage = processarImagemPassaAlta(imagem.getBufferedImage(), "sobel");
 			break;
 		case 5:
-			b = processarImagemPassaAlta(imagem.getBufferedImage(), "roberts");
+			bufferImage = processarImagemPassaAlta(imagem.getBufferedImage(), "roberts");
 			break;
 		default:
-			b = getPBImage();
+			bufferImage = getPBImage(imagem.getBufferedImage());
 		}
-		return b;
+		return bufferImage;
 	}
 
+	public void getBufferedAplicarHistogramaFiltros(int option) {
+		
+		bufferImage = new BufferedImage(imagem.getBufferedImage().getWidth(), imagem.getBufferedImage().getHeight(), BufferedImage.TYPE_BYTE_GRAY); 
+
+		switch(option)
+		{
+		case 1:
+			bufferImage = processarImagemMedia(imagem.getBufferedImage());
+			(new Histograma(bufferImage)).display();
+			break;
+		case 2:
+			bufferImage = processarImagemMediana(imagem.getBufferedImage());
+			(new Histograma(bufferImage)).display();
+			break;
+		case 3:
+			bufferImage = processarImagemEqualizacao(imagem.getBufferedImage());
+			(new Histograma(bufferImage)).display();
+			break;
+		case 4:
+			bufferImage = processarImagemPassaAlta(imagem.getBufferedImage(), "sobel");
+			(new Histograma(bufferImage)).display();
+			break;
+		case 5:
+			bufferImage = processarImagemPassaAlta(imagem.getBufferedImage(), "roberts");
+			(new Histograma(bufferImage)).display();
+			break;
+		default:
+			bufferImage = getPBImage(imagem.getBufferedImage());
+			(new Histograma(bufferImage)).display();
+		}		
+	}
+	
 	// Método para Cálculo da Mediana de um vetor de npts pontos
 	public static double CalcularMediana(int npts, int []v){
 
 		int aux;
-
 		// Ordena em ordem crescente os elementos do vetor
 
 		for(int i=0; i<npts-1; i++)
@@ -123,7 +156,6 @@ public class Processamento {
 
 	public static void lerJanela3x3(Raster raster, int []v, int x, int y, int banda){
 
-
 		v[0] = raster.getSample(x-1,y-1,banda);
 		v[1] = raster.getSample(x  ,y-1,banda);
 		v[2] = raster.getSample(x+1,y-1,banda);
@@ -140,12 +172,8 @@ public class Processamento {
 	public static BufferedImage processarImagemMediana (BufferedImage ima_in) {
 
 		BufferedImage ima_out  = new BufferedImage(ima_in.getWidth(),ima_in.getHeight(),ima_in.getType());
-
-		// Recupera matriz das imagens de entrada e saida
-		Raster raster = ima_in.getRaster(); // declara e instancia objeto raster soh para leitura
-		WritableRaster wraster = ima_out.getRaster(); // declara e instancia objeto raster para escrita
-
-		// Processa valores da imagem de entrada e armazena na imagem de saida
+		Raster raster = ima_in.getRaster();
+		WritableRaster wraster = ima_out.getRaster();
 
 		double valornr, valorng, valornb;
 		int[] v = new int[9];
@@ -154,7 +182,6 @@ public class Processamento {
 			for(int x=1; x<ima_in.getWidth()-1; x++){
 
 				// Aplica Filtro de Mediana 3x3
-
 				lerJanela3x3(raster,v,x,y,0);
 				valornr = CalcularMediana(9,v);
 
@@ -167,19 +194,15 @@ public class Processamento {
 				wraster.setSample(x,y,0,(int)(valornr+.5));
 				wraster.setSample(x,y,1,(int)(valorng+.5));
 				wraster.setSample(x,y,2,(int)(valornb+.5));
-
 			}
-
 		return ima_out;
-
 	}
 
 	public static BufferedImage processarImagemMedia (BufferedImage ima_in) {
 
 		BufferedImage ima_out  = new BufferedImage(ima_in.getWidth(),ima_in.getHeight(),ima_in.getType());
-
-		Raster raster = ima_in.getRaster(); // declara e instancia objeto raster soh para leitura
-		WritableRaster wraster = ima_out.getRaster(); // declara e instancia objeto raster para escrita
+		Raster raster = ima_in.getRaster();
+		WritableRaster wraster = ima_out.getRaster();
 
 		int r;
 		double valornr, valorng, valornb;
@@ -192,9 +215,7 @@ public class Processamento {
 		for(int y=1; y<ima_in.getHeight()-1; y++)
 			for(int x=1; x<ima_in.getWidth()-1; x++){
 
-				r = raster.getSample(x,y,0);  // le dado da banda 0 da imagem de entrada
-
-
+				r = raster.getSample(x,y,0);
 				//	Filtro de média
 
 				valornr = p[0][0]*(double)raster.getSample(x-1,y-1,0) + p[0][1]*(double)raster.getSample(x,y-1,0) +
@@ -222,23 +243,15 @@ public class Processamento {
 				wraster.setSample(x,y,0,(int)(valornr+.5));
 				wraster.setSample(x,y,1,(int)(valorng+.5));
 				wraster.setSample(x,y,2,(int)(valornb+.5));
-
-				//					if(y<=3 && x<=3)
-				//						System.out.println(y+" "+x+"  Valores "+r+"  "+g+"  "+b+" "+valorn);
-
 			}
 		return ima_out;
-
 	}
 
 	public BufferedImage processarImagemPassaAlta(BufferedImage ima_in, String filtro) {
 
 		BufferedImage ima_out  = new BufferedImage(ima_in.getWidth(),ima_in.getHeight(),ima_in.getType());
-
-		Raster raster = ima_in.getRaster(); // declara e instancia objeto raster soh para leitura
-		WritableRaster wraster = ima_out.getRaster(); // declara e instancia objeto raster para escrita
-
-		// Processa valores da imagem de entrada e armazena na imagem de saida
+		Raster raster = ima_in.getRaster();
+		WritableRaster wraster = ima_out.getRaster();
 
 		double valornr, valorng, valornb;
 		int[] v = new int[9];
@@ -250,20 +263,15 @@ public class Processamento {
 			for(int x=1; x<ima_in.getWidth()-1; x++){
 
 				//Aplica Filtro
-
 				lerJanela3x3(raster,v,x,y,0);
 
 				valornr = (filtro.equals("sobel")) ? CalcularSobel(9,v) : CalcularRoberts(9,v);
-				//valornr = CalcularSobel(9,v);
-
 				if((valornr+=(double)v[4])>255.)valornr = 255.;
 
 				if(valornr < minr) minr = valornr;
 				if(valornr > maxr) maxr = valornr;
 
-
 				lerJanela3x3(raster,v,x,y,1);
-				//valorng = CalcularSobel(9,v);
 				valorng = (filtro.equals("sobel")) ? CalcularSobel(9,v) : CalcularRoberts(9,v);
 
 				if((valorng+=(double)v[4])>255.)valorng = 255.;
@@ -271,20 +279,16 @@ public class Processamento {
 				if(valorng < ming) ming = valorng;
 				if(valorng > maxg) maxg = valorng;
 
-
 				lerJanela3x3(raster,v,x,y,2);
-				//valornb = CalcularSobel(9,v);
 				valornb = (filtro.equals("sobel")) ? CalcularSobel(9,v) : CalcularRoberts(9,v);
 
 				if((valornb+=(double)v[4])>255.)valornb = 255.;
-
 				if(valornb < minb) minb = valornb;
 				if(valornb > maxb) maxb = valornb;
 
 				wraster.setSample(x,y,0,(int)(valornr+.5));
 				wraster.setSample(x,y,1,(int)(valorng+.5));
 				wraster.setSample(x,y,2,(int)(valornb+.5));
-
 			}
 		return ima_out;
 	};
@@ -330,9 +334,9 @@ public class Processamento {
 
 	}
 
-	public BufferedImage calcularEqualizacao(BufferedImage imagem) {
-		boolean[][] bmask = null;
-		// histogram
+	public BufferedImage processarImagemEqualizacao(BufferedImage imagem) {
+
+		// histograma
 		int[] histRed = new int[256];
 		int[] histGreen = new int[256];
 		int[] histBlue = new int[256];
@@ -366,8 +370,7 @@ public class Processamento {
 			cdfBlue[i] 	= cdfBlue[i-1]+histBlue[i];
 		}
 
-
-		// Equalization
+		// Equalizacao
 		int numberOfPixels = imagem.getWidth()*imagem.getHeight();
 		int minRed = min(cdfRed);
 		int minGreen = min(cdfGreen);
@@ -389,9 +392,7 @@ public class Processamento {
 			}
 		}
 		return ima_out;
-
 	}
-
 
 	private int min(int[] arr){
 		int min=-1;

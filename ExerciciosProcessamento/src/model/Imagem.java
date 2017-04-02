@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -18,9 +17,7 @@ public class Imagem {
     private int imagemPixelRGB[];
     private double histograma[] = new double[256];
     private double imagemPixelInline[];
-    private int media;
-    private double mediana;
-    private int moda;
+
     //private int variancia;
     private boolean escalaCinza;
     
@@ -87,16 +84,10 @@ public class Imagem {
                 }
             }
 
-        } catch( Exception e )
-        {
+        } catch( Exception e ) {
             System.out.println(e.getMessage());
         }
-        
         gerarHistograma();
-        gerarMedia();
-        gerarMediana();
-        //makeModa();
-        //makeVariancia();
     }
 
     private void gerarHistograma() {
@@ -106,26 +97,7 @@ public class Imagem {
             }
         }
     }
-    
-    private void gerarMedia() {
-        int somaPixels = 0;
-
-        for (int w = 0; w < bufferedImage.getWidth(); w++) {
-            for (int h = 0; h < bufferedImage.getHeight(); h++) {
-                somaPixels += imagemPixel[w][h];
-            }
-        }
-        media = somaPixels/( bufferedImage.getWidth() * bufferedImage.getHeight() );
-    }
-    
-    private void gerarMediana() {
-        double arrAux[] = imagemPixelInline;
-
-        Arrays.sort( arrAux );
-        mediana = arrAux[arrAux.length / 2];
-    }
-    
-    
+        
     public static int getPixelPB(int[] vetRGB) {
         long px;
     
@@ -148,14 +120,4 @@ public class Imagem {
     public BufferedImage getBufferedImage() {
         return bufferedImage;
     }
-    
-    public int getMedia()
-    {
-        return media;
-    }
-    public int getMediana()
-    {
-        return (int)mediana;
-    }
-    
 }

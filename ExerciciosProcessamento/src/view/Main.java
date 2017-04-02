@@ -19,498 +19,385 @@ public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private Controller controller;
-    private int zoom = 0;
-    
-    /** Criado um novo form  */
-    public Main() {
-        initComponents();
-        getContentPane().setBackground(Color.WHITE); 
-        setLocationRelativeTo(null);
-    }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+	/** Criado um novo form  */
+	public Main() {
+		initComponents();
+		getContentPane().setBackground(Color.WHITE); 
+		setLocationRelativeTo(null);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initComponents() {
 
-        btnEscolherImagem = new JButton();
-        fieldImagemPath = new JTextField();
-        panelValues = new JPanel();
-        btnHistograma = new JButton();
-        lblTituloMediana = new JLabel();
-        lblMediana = new JLabel();
-        lblTituloMedia = new JLabel();
-        lblMedia = new JLabel();
-        lblVariancia = new JLabel();
-        lblTitleModa = new JLabel();
-        lblModa = new JLabel();
-        lblTitleVariancia = new JLabel();
-        lblImagemOriginal = new JLabel();
-        lblImagemProcessada = new JLabel();
-        jPainel = new JPanel();
-        lblTitleTrabalho1 = new JLabel();
-        comboFiltros = new JComboBox();
-        lblTitleTrabalho2 = new JLabel();
-        comboAngulo = new JSpinner();
-        btnZoomIn = new JButton();
-        btnZoomOut = new JButton();
-        btnEspelhar = new JButton();
-        btnOriginal = new JButton();
-        lblResizebleImage = new JLabel();
-        panelProcessedImage = new JScrollPane();
-        lblProcessedImage = new JLabel();
-        btnVerOriginal = new JButton();
+		btnEscolherImagem = new JButton();
+		fieldImagemPath = new JTextField();
+		panelValues = new JPanel();
+		btnHistograma = new JButton();
+		lblImagemOriginal = new JLabel();
+		lblImagemProcessada = new JLabel();
+		jPainel = new JPanel();
+		lblTitleTrabalho1 = new JLabel();
+		comboFiltros = new JComboBox();
+		lblTitleTrabalho2 = new JLabel();
+		comboAngulo = new JSpinner();
+		btnContrasteIn = new JButton();
+		btnContrasteOut = new JButton();
+		btnHistogramaFiltro = new JButton();
+		btnOriginal = new JButton();
+		lblResizebleImage = new JLabel();
+		panelProcessedImage = new JScrollPane();
+		lblProcessedImage = new JLabel();
+		btnVerOriginal = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Processamento Gráfico");
-        setBackground(new Color(255, 255, 255));
-        setName("mainFrame"); // NOI18N
-        setResizable(false);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setTitle("Processamento Gráfico");
+		setBackground(new Color(255, 255, 255));
+		setName("mainFrame"); // NOI18N
+		setResizable(false);
 
-        btnEscolherImagem.setBackground(new java.awt.Color(251, 252, 252));
-        btnEscolherImagem.setForeground(new java.awt.Color(35, 44, 44));
-        btnEscolherImagem.setText("Escolher Imagem");
-        btnEscolherImagem.setToolTipText("Ao clicar, escolha uma imagem a partir de seu computador");
-        btnEscolherImagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btImageChooserActionPerformed(evt);
-            }
-        });
+		btnEscolherImagem.setBackground(new java.awt.Color(251, 252, 252));
+		btnEscolherImagem.setForeground(new java.awt.Color(35, 44, 44));
+		btnEscolherImagem.setText("Escolher Imagem");
+		btnEscolherImagem.setToolTipText("Ao clicar, escolha uma imagem a partir de seu computador");
+		btnEscolherImagem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btImageChooserActionPerformed(evt);
+			}
+		});
 
-        fieldImagemPath.setEnabled(false);
-        fieldImagemPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldImagePathActionPerformed(evt);
-            }
-        });
+		fieldImagemPath.setEnabled(false);
+		fieldImagemPath.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				fieldImagePathActionPerformed(evt);
+			}
+		});
 
-        panelValues.setOpaque(false);
+		panelValues.setOpaque(false);
 
-        btnHistograma.setText("Histograma");
-        btnHistograma.setEnabled(false);
-        btnHistograma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistogramaActionPerformed(evt);
-            }
-        });
+		btnHistograma.setText("Histograma");
+		btnHistograma.setEnabled(false);
+		btnHistograma.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnHistogramaActionPerformed(evt);
+			}
+		});
 
-        lblTituloMediana.setText("Mediana");
+		javax.swing.GroupLayout panelValuesLayout = new javax.swing.GroupLayout(panelValues);
+		panelValues.setLayout(panelValuesLayout);
+		panelValuesLayout.setHorizontalGroup(
+				panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelValuesLayout.createSequentialGroup()
+						.addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(btnHistograma)
+						.addContainerGap())
+				);
+		panelValuesLayout.setVerticalGroup(
+				panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(panelValuesLayout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(btnHistograma))
+						.addContainerGap())
+				);
 
-        lblMediana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMediana.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblMediana.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		lblImagemOriginal.setText("Imagem Original em tamanho redimensionado");
+		lblImagemProcessada.setText("Imagem Processada");
 
-        lblTituloMedia.setText("Média");
+		jPainel.setOpaque(false);
 
-        lblMedia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMedia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblMedia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		lblTitleTrabalho1.setText("Filtros");
 
-        lblVariancia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVariancia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblVariancia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		comboFiltros.setModel(new DefaultComboBoxModel(new String[] { "P e B", "Media", "Mediana", "Equalização","Sobel", "Roberts" }));
+		comboFiltros.setEnabled(false);
+		comboFiltros.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				comboTrabalho1ActionPerformed(evt);
+			}
+		});
 
-        lblTitleModa.setText("Moda");
+		lblTitleTrabalho2.setText("Contraste");
 
-        lblModa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblModa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblModa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		comboAngulo.setEnabled(false);
+		comboAngulo.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				comboAnguloStateChanged(evt);
+			}
+		});
+		comboAngulo.addInputMethodListener(new java.awt.event.InputMethodListener() {
+			public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+				comboAnguloInputMethodTextChanged(evt);
+			}
+			public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+			}
+		});
 
-        lblTitleVariancia.setText("Variância");
-        lblTitleVariancia.setBorder(null);
+		btnContrasteIn.setText("+");
+		btnContrasteIn.setEnabled(false);
+		btnContrasteIn.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnContrasteInActionPerformed(evt);
+			}
+		});
 
-        javax.swing.GroupLayout panelValuesLayout = new javax.swing.GroupLayout(panelValues);
-        panelValues.setLayout(panelValuesLayout);
-        panelValuesLayout.setHorizontalGroup(
-            panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelValuesLayout.createSequentialGroup()
-                .addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblModa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitleModa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitleVariancia)
-                    .addComponent(lblVariancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTituloMedia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloMediana)
-                    .addComponent(lblMediana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHistograma)
-                .addContainerGap())
-        );
-        panelValuesLayout.setVerticalGroup(
-            panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelValuesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitleVariancia)
-                    .addComponent(lblTituloMediana)
-                    .addComponent(lblTituloMedia)
-                    .addComponent(lblTitleModa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelValuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMediana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistograma)
-                    .addComponent(lblMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblModa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblVariancia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+		btnContrasteOut.setText("-");
+		btnContrasteOut.setEnabled(false);
+		btnContrasteOut.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnContrasteOutActionPerformed(evt);
+			}
+		});
 
-        lblImagemOriginal.setText("Imagem Original em tamanho redimensionado");
+		btnHistogramaFiltro.setText("Histograma Filtro");
+		btnHistogramaFiltro.setEnabled(false);
+		btnHistogramaFiltro.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnEspelharActionPerformed(evt);
+			}
+		});
 
-        lblImagemProcessada.setText("Imagem Processada");
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPainel);
+		jPainel.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(lblTitleTrabalho1)
+								.addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(21, 21, 21)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addComponent(lblTitleTrabalho2)
+								.addComponent(btnHistogramaFiltro))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(comboAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(btnContrasteIn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(btnContrasteOut, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+		jPanel1Layout.setVerticalGroup(
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblTitleTrabalho1)
+								.addComponent(lblTitleTrabalho2))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(comboAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnContrasteIn)
+								.addComponent(btnContrasteOut)
+								.addComponent(btnHistogramaFiltro))
+				.addContainerGap())
+				);
 
-        jPainel.setOpaque(false);
+		lblResizebleImage.setBorder(null);
 
-        lblTitleTrabalho1.setText("Filtros");
+		panelProcessedImage.setBackground(new java.awt.Color(255, 255, 255));
+		panelProcessedImage.setBorder(null);
+		panelProcessedImage.setForeground(new java.awt.Color(255, 255, 255));
+		panelProcessedImage.setViewportBorder(null);
 
-        comboFiltros.setModel(new DefaultComboBoxModel(new String[] { "P e B", "Media", "Mediana", "Equalização","Sobel", "Roberts" }));
-        comboFiltros.setEnabled(false);
-        comboFiltros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTrabalho1ActionPerformed(evt);
-            }
-        });
+		lblProcessedImage.setBackground(new java.awt.Color(255, 255, 255));
+		lblProcessedImage.setBorder(null);
+		lblProcessedImage.setOpaque(true);
+		lblProcessedImage.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				lblProcessedImageMouseEntered(evt);
+			}
+		});
+		panelProcessedImage.setViewportView(lblProcessedImage);
 
-        lblTitleTrabalho2.setText("Trabalho 2");
+		btnVerOriginal.setText("Ver Original");
+		btnVerOriginal.setEnabled(false);
+		btnVerOriginal.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnVerOriginalActionPerformed(evt);
+			}
+		});
 
-        comboAngulo.setEnabled(false);
-        comboAngulo.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                comboAnguloStateChanged(evt);
-            }
-        });
-        comboAngulo.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                comboAnguloInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup()
+										.addComponent(btnEscolherImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(fieldImagemPath))
+								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(layout.createSequentialGroup()
+														.addComponent(lblImagemOriginal)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(btnVerOriginal))
+												.addComponent(panelValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblResizebleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(layout.createSequentialGroup()
+														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																.addGroup(layout.createSequentialGroup()
+																		.addGap(47, 47, 47)
+																		.addComponent(jPainel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+																.addGroup(layout.createSequentialGroup()
+																		.addGap(18, 18, 18)
+																		.addComponent(lblImagemProcessada)))
+														.addGap(80, 92, Short.MAX_VALUE))
+												.addGroup(layout.createSequentialGroup()
+														.addGap(12, 12, 12)
+														.addComponent(panelProcessedImage)))))
+						.addContainerGap())
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnEscolherImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(fieldImagemPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lblImagemOriginal)
+								.addComponent(lblImagemProcessada)
+								.addComponent(btnVerOriginal))
+						.addGap(2, 2, 2)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(lblResizebleImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panelProcessedImage, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addComponent(jPainel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panelValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap())
+				);
 
-        btnZoomIn.setText("+");
-        btnZoomIn.setEnabled(false);
-        btnZoomIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnZoomInActionPerformed(evt);
-            }
-        });
+		pack();
+	}
 
-        btnZoomOut.setText("-");
-        btnZoomOut.setEnabled(false);
-        btnZoomOut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnZoomOutActionPerformed(evt);
-            }
-        });
+	private void btImageChooserActionPerformed(java.awt.event.ActionEvent evt) {
 
-        btnEspelhar.setText("Espelhar");
-        btnEspelhar.setEnabled(false);
-        btnEspelhar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEspelharActionPerformed(evt);
-            }
-        });
+		JFileChooser fileChooser =  new JFileChooser();
 
-        btnOriginal.setText("Ajustar");
-        btnOriginal.setToolTipText("Clique para ajustar a imagem ao seu estado original");
-        btnOriginal.setEnabled(false);
-        btnOriginal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOriginalActionPerformed(evt);
-            }
-        });
+		fileChooser.setDialogTitle("Abrir Imagem");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPainel);
-        jPainel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitleTrabalho1)
-                    .addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTitleTrabalho2)
-                    .addComponent(btnEspelhar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnZoomIn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnZoomOut, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnOriginal)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitleTrabalho1)
-                    .addComponent(lblTitleTrabalho2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnZoomIn)
-                    .addComponent(btnZoomOut)
-                    .addComponent(btnEspelhar)
-                    .addComponent(btnOriginal))
-                .addContainerGap())
-        );
+		int r = fileChooser.showOpenDialog(this);
 
-        lblResizebleImage.setBorder(null);
+		if (r != 1) {
+			controller = new Controller(this, fileChooser.getSelectedFile());
+			btnHistogramaFiltro.setEnabled(true);
+			btnHistograma.setEnabled(true);
+			btnOriginal.setEnabled(false);
+			btnVerOriginal.setEnabled(true);
+			btnContrasteIn.setEnabled(false);
+			btnContrasteOut.setEnabled(false);
+			comboFiltros.setEnabled(true);
+			comboAngulo.setEnabled(false);
+		}
+	}
 
-        panelProcessedImage.setBackground(new java.awt.Color(255, 255, 255));
-        panelProcessedImage.setBorder(null);
-        panelProcessedImage.setForeground(new java.awt.Color(255, 255, 255));
-        panelProcessedImage.setViewportBorder(null);
+	private void fieldImagePathActionPerformed(java.awt.event.ActionEvent evt) {}
 
-        lblProcessedImage.setBackground(new java.awt.Color(255, 255, 255));
-        lblProcessedImage.setBorder(null);
-        lblProcessedImage.setOpaque(true);
-        lblProcessedImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblProcessedImageMouseEntered(evt);
-            }
-        });
-        panelProcessedImage.setViewportView(lblProcessedImage);
+	private void btnHistogramaActionPerformed(java.awt.event.ActionEvent evt) {
+		(new Histograma(controller.getImagem())).setVisible(true);
+	}
 
-        btnVerOriginal.setText("Ver Original");
-        btnVerOriginal.setEnabled(false);
-        btnVerOriginal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerOriginalActionPerformed(evt);
-            }
-        });
+	private void comboTrabalho1ActionPerformed(java.awt.event.ActionEvent evt) {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEscolherImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldImagemPath))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblImagemOriginal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnVerOriginal))
-                            .addComponent(panelValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblResizebleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(47, 47, 47)
-                                        .addComponent(jPainel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblImagemProcessada)))
-                                .addGap(80, 92, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(panelProcessedImage)))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEscolherImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fieldImagemPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblImagemOriginal)
-                    .addComponent(lblImagemProcessada)
-                    .addComponent(btnVerOriginal))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblResizebleImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelProcessedImage, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPainel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+		if( comboFiltros.getSelectedIndex() >= 0 && comboFiltros.getSelectedIndex() < 6) {
+			controller.aplicarFiltros(comboFiltros.getSelectedIndex());
+		}   
+	}
 
-        pack();
-    }
+	private void lblProcessedImageMouseEntered(java.awt.event.MouseEvent evt) {}
 
-private void btImageChooserActionPerformed(java.awt.event.ActionEvent evt) {
-    
-    JFileChooser fileChooser =  new JFileChooser();
-    
-    fileChooser.setDialogTitle("Abrir Imagem");
-    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-    
-    int r = fileChooser.showOpenDialog(this);
-    
-    if (r != 1)
-    {
-        zoom = 0;
-        controller = new Controller(this, fileChooser.getSelectedFile());
-        btnEspelhar.setEnabled(true);
-        btnHistograma.setEnabled(true);
-        btnOriginal.setEnabled(true);
-        btnVerOriginal.setEnabled(true);
-        btnZoomIn.setEnabled(true);
-        btnZoomOut.setEnabled(true);
-        comboFiltros.setEnabled(true);
-        comboAngulo.setEnabled(true);
-    }
+	private void comboAnguloInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {}
+
+	private void comboAnguloStateChanged(javax.swing.event.ChangeEvent evt) {}
+
+	private void btnContrasteInActionPerformed(java.awt.event.ActionEvent evt) { /*TODO implementar contraste */ }
+
+	private void btnContrasteOutActionPerformed(java.awt.event.ActionEvent evt) { /*TODO implementar contraste */ }
+
+	private void btnEspelharActionPerformed(java.awt.event.ActionEvent evt) {
+
+		if( comboFiltros.getSelectedIndex() >= 0 && comboFiltros.getSelectedIndex() < 6)
+		{
+			controller.aplicarHistogramaFiltros(comboFiltros.getSelectedIndex());
+		}
+	}
+
+	private void btnVerOriginalActionPerformed(java.awt.event.ActionEvent evt) {
+		new ImagemOriginal(controller.getImagem().getBufferedImage());
+	}
+
+	public static void main(String args[]) {
+
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		}
+
+		/* exibicao do form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				new Main().setVisible(true);
+			}
+		});
 
 
-}
+	}
 
-private void fieldImagePathActionPerformed(java.awt.event.ActionEvent evt) {
-// TODO add your handling code here:
-}
-
-private void btnHistogramaActionPerformed(java.awt.event.ActionEvent evt) {
-    (new Histograma(controller.getImagem())).setVisible(true);
-}
-
-private void comboTrabalho1ActionPerformed(java.awt.event.ActionEvent evt) {
-
-    
-    if( comboFiltros.getSelectedIndex() >= 0 && comboFiltros.getSelectedIndex() < 6)
-    {
-        controller.aplicarFiltros(comboFiltros.getSelectedIndex());
-    }
-    
-}//GEN-LAST:event_comboTrabalho1ActionPerformed
-
-private void lblProcessedImageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProcessedImageMouseEntered
-}//GEN-LAST:event_lblProcessedImageMouseEntered
-
-private void comboAnguloInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboAnguloInputMethodTextChanged
-
-}//GEN-LAST:event_comboAnguloInputMethodTextChanged
-
-private void comboAnguloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_comboAnguloStateChanged
-    
-    //controller.transformTrabalhoDois(Float.parseFloat(comboAngulo.getValue().toString()));
-    lblImagemProcessada.setSize(2048, 2048);
-       
-}//GEN-LAST:event_comboAnguloStateChanged
-
-private void btnZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomInActionPerformed
-    zoom++;
-    zoom = zoom == -3 ? -2 : zoom;
-    //controller.transformZoom(zoom);
-
-    btnZoomOut.setEnabled(zoom > -4 && zoom < 4);
-    btnOriginal.setEnabled( true );
-}//GEN-LAST:event_btnZoomInActionPerformed
-
-private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOutActionPerformed
-    zoom--;
-            
-    zoom = zoom == -3 ? -4 : zoom;
-
-    //controller.transformZoom(zoom);
-
-    btnZoomOut.setEnabled( zoom > -4);
-    btnOriginal.setEnabled( true );
-}//GEN-LAST:event_btnZoomOutActionPerformed
-
-    private void btnEspelharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspelharActionPerformed
-        /*if( "Espelhar".equals(btnEspelhar.getText()) )
-        {
-            controller.transformEspelhada();
-            btnEspelhar.setText("Original");
-        }
-        else
-        {
-            controller.setPBImage();
-            btnEspelhar.setText("Espelhar");
-        }*/
-        
-    }//GEN-LAST:event_btnEspelharActionPerformed
-
-    private void btnVerOriginalActionPerformed(java.awt.event.ActionEvent evt) {
-        new ImagemOriginal(controller.getImagem().getBufferedImage());
-    }
-
-    private void btnOriginalActionPerformed(java.awt.event.ActionEvent evt) {
-       controller.setPBImage();
-        btnOriginal.setEnabled(false);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        /* exibicao do form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
-        
-        
-    }
-
-    private javax.swing.JButton btnEscolherImagem;
-    private javax.swing.JButton btnEspelhar;
-    private javax.swing.JButton btnHistograma;
-    private javax.swing.JButton btnOriginal;
-    private javax.swing.JButton btnVerOriginal;
-    private javax.swing.JButton btnZoomIn;
-    private javax.swing.JButton btnZoomOut;
-    private javax.swing.JSpinner comboAngulo;
-    private javax.swing.JComboBox comboFiltros;
-    public javax.swing.JTextField fieldImagemPath;
-    private javax.swing.JPanel jPainel;
-    private javax.swing.JLabel lblImagemOriginal;
-    private javax.swing.JLabel lblImagemProcessada;
-    public javax.swing.JLabel lblMedia;
-    public javax.swing.JLabel lblMediana;
-    public javax.swing.JLabel lblModa;
-    public javax.swing.JLabel lblProcessedImage;
-    public javax.swing.JLabel lblResizebleImage;
-    private javax.swing.JLabel lblTituloMedia;
-    private javax.swing.JLabel lblTituloMediana;
-    private javax.swing.JLabel lblTitleModa;
-    private javax.swing.JLabel lblTitleTrabalho1;
-    private javax.swing.JLabel lblTitleTrabalho2;
-    private javax.swing.JLabel lblTitleVariancia;
-    public javax.swing.JLabel lblVariancia;
-    public javax.swing.JScrollPane panelProcessedImage;
-    private javax.swing.JPanel panelValues;
+	private javax.swing.JButton btnEscolherImagem;
+	private javax.swing.JButton btnHistogramaFiltro;
+	private javax.swing.JButton btnHistograma;
+	private javax.swing.JButton btnOriginal;
+	private javax.swing.JButton btnVerOriginal;
+	private javax.swing.JButton btnContrasteIn;
+	private javax.swing.JButton btnContrasteOut;
+	private javax.swing.JSpinner comboAngulo;
+	@SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox comboFiltros;
+	public javax.swing.JTextField fieldImagemPath;
+	private javax.swing.JPanel jPainel;
+	private javax.swing.JLabel lblImagemOriginal;
+	private javax.swing.JLabel lblImagemProcessada;
+	public javax.swing.JLabel lblMedia;
+	public javax.swing.JLabel lblMediana;
+	public javax.swing.JLabel lblModa;
+	public javax.swing.JLabel lblProcessedImage;
+	public javax.swing.JLabel lblResizebleImage;
+	private javax.swing.JLabel lblTitleTrabalho1;
+	private javax.swing.JLabel lblTitleTrabalho2;
+	public javax.swing.JScrollPane panelProcessedImage;
+	private javax.swing.JPanel panelValues;
 
 }
