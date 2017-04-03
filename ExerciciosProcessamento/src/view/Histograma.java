@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Imagem;
-import model.Processamento;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -69,11 +68,6 @@ public class Histograma extends ApplicationFrame {
 		final int h = this.imagemFiltro.getHeight();
 		double[] r = new double[w * h];
 
-		// vetor de pixels da imagem. Tirado do BufferedImage
-		int pixelsImage []  = this.imagemFiltro.getRGB(0, 0, w, h, null, 0, w);
-		// pegando o histograma
-		double[] histogram = Processamento.getMatrixHistogramGrayScale(pixelsImage, h, w);
-
 		r = raster.getSamples(0, 0, w, h, 0, r);
 		dataset.addSeries("Vermelho", r, BINS);
 
@@ -82,10 +76,6 @@ public class Histograma extends ApplicationFrame {
 
 		r = raster.getSamples(0, 0, w, h, 2, r);
 		dataset.addSeries("Azul", r, BINS);
-
-		System.out.println("aaaaaaaaa " + histogram);
-		
-		//dataset.addSeries("Pixels", imagem.getImagePixelInline(), 256,0.0,256.0);
 		
 		// chart
 		JFreeChart chart = ChartFactory.createHistogram(
